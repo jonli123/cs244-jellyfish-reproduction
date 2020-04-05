@@ -36,14 +36,17 @@ The code is structured as follows:
 1. Open up a terminal
 1. Clone this repo, `$ git clone https://github.com/brucespang/jellyfish-reproduction.git`
 1. `$ cd jellyfish-reproduction`
-1. Run `$ vagrant up` to create your Vagrant box.
+1. Run `$ vagrant up` to create your Vagrant box. This takes some time--it will download a VM from vagrant and set it up. For me, it took about 3 minutes.
 1. Run `$ vagrant ssh` to log into the newly created box.
 
 You should see something like this:
 ```
 $ vagrant ssh
 ...
-vagrant@ubuntu-bionic:~$
+vagrant@ubuntu-bionic:~$ ls
+mininet  pox
+vagrant@ubuntu-bionic:~ ls /vagrant
+figures  jellyfish  Makefile  notebooks  README.md requirements.txt  setup.py	tests  Vagrantfile
 ```
 
 All the code in the `jellyfish-reproduction` repo should be available in the `/vagrant` directory in the virtual machine. You should be able to edit files on your host machine using your favorite editor, and vagrant will automatically sync them.
