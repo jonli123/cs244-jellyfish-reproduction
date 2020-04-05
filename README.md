@@ -53,7 +53,7 @@ All the code in the `jellyfish-reproduction` repo should be available in the `/v
 
 ### Generating figures
 
-There are placeholder methods in `jellyfish/figures.py` for each figure you'll need to implement. You can generate a particular figure by runnning (for example):
+There are placeholder methods in `jellyfish/figures.py` for each figure you'll need to implement. Once implemented, you can generate a particular figure by runnning (e.g.):
 ```
 vagrant@ubuntu-bionic:/vagrant$ jellyfish figure_1c figures/figure_1c.png
 ```
@@ -71,9 +71,9 @@ jellyfish table_1 figures/table_1.txt
 
 ### Running Jupyter
 
-[Jupyter](https://jupyter.org/) is a way to run an interactive Python notebook, you can write python and draw graphs inline. We find that it dramatically improves our productivity over running a stand-alone script, especially if it takes a while to generate the data and we're making slight changes to a standalone script.
+[Jupyter](https://jupyter.org/) lets you run interactive Python notebooks, in which you can write python and draw graphs inline. We find that it dramatically improves our productivity over running a stand-alone script, especially if it takes a while to generate the data and we're making slight changes to graphs.
 
-You are welcome to work on the project however you want, but if we were working on this project, we would make all the graphs in Jupyter and then move the code to `jellyfish/figures.py`. This would help get each graph done faster, and then we would be able to easily generate all the figures before turning in the project.
+You are welcome to work on the project however you want, but if we were working on this project, we would make all the graphs in Jupyter and then move the code to `jellyfish/figures.py`. This would help get each graph done faster, and then we would be able to easily test and generate all the figures before turning in the project.
 
 You can start the jupyter notebook server by running the following. There's an example notebook in `notebooks/Example Notebook.ipynb`
 
@@ -95,20 +95,43 @@ vagrant@ubuntu-bionic:/vagrant$ sudo jellyfish mn --graph='fat_tree' -k 4
 mininet>
 ```
 
+If you want to play around with mininet, it is installed in the usual way. You can do things like:
+```
+vagrant@ubuntu-bionic:/vagrant$ sudo mn
+*** Creating network
+*** Adding controller
+*** Adding hosts:
+h1 h2
+*** Adding switches:
+s1
+*** Adding links:
+(h1, s1) (h2, s1)
+*** Configuring hosts
+h1 h2
+*** Starting controller
+c0
+*** Starting 1 switches
+s1 ...
+*** Starting CLI:
+mininet> pingall
+*** Ping: testing ping reachability
+h1 -> h2
+h2 -> h1
+*** Results: 0% dropped (2/2 received)
+```
+
 ### Running tests
 
 There are some very basic tests written for your Jellyfish graph generator in `tests/`. You will also need to write your own routing test. You can run the files on their own, or run them all together by running
 ```
 vagrant@ubuntu-bionic:/vagrant$ make test
-sudo python tests/test_routing.py
-.
+test_correct_degree (tests.test_jellyfish.TestJellyfishGenerator) ... ok
+test_correct_number_hosts (tests.test_jellyfish.TestJellyfishGenerator) ... ok
+test_correct_number_switches (tests.test_jellyfish.TestJellyfishGenerator) ... ok
+test_jellyfish_hosts_reachable (tests.test_routing.TestRouting) ... ok
+
 ----------------------------------------------------------------------
-Ran 1 test in 1.265s
+Ran 4 tests in 1.191s
 
 OK
-python tests/test_jellyfish.py
-...
-----------------------------------------------------------------------
-Ran 3 tests in 0.037s
-
-OK```
+```

@@ -4,8 +4,7 @@ all: test figures
 .PHONY: test
 test:
 # Mininet requires running as root
-	sudo python tests/test_routing.py
-	python tests/test_jellyfish.py
+	sudo python -m unittest -v -b tests/*.py
 
 .PHONY: figures
 figures: figures/figure_1a.png figures/figure_1b.png figures/figure_1c.png figures/figure_2a.png figures/figure_2b.png figures/figure_9.png figures/figure_1c_mininet.png figures/table_1.txt
