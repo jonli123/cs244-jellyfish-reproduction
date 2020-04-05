@@ -1,2 +1,3 @@
 .vagrant/
 notebooks/.ipynb_checkpoints
+jellyfish_reproduction.egg-info/
