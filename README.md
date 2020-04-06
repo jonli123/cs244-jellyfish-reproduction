@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is the starter code for the CS244 guided reproduction of [Jellyfish](https://www.usenix.org/system/files/conference/nsdi12/nsdi12-final82.pdf).
+This is the starter code for the [CS244 guided reproduction](https://docs.google.com/document/d/1vYp_pjUhnYvBnKkvGeUV7yh6g3UndBrVRNcMLRtMEw4/edit?usp=sharing) of [Jellyfish](https://www.usenix.org/system/files/conference/nsdi12/nsdi12-final82.pdf).
 
 It provides a vagrant box with most of the tools you will need installed, and some structure for the project.
 
