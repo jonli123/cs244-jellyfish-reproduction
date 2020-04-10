@@ -36,7 +36,7 @@ The code is structured as follows:
 1. Open up a terminal
 1. Clone this repo, `$ git clone https://github.com/brucespang/jellyfish-reproduction.git`
 1. `$ cd jellyfish-reproduction`
-1. Run `$ vagrant up` to create your Vagrant box. This takes some time--it will download a VM from vagrant and set it up. For me, it took about 3 minutes.
+1. Run `$ vagrant up` to create your Vagrant box. This takes some time--it will download a VM from vagrant and set it up. For me, it took about 3 minutes. There's currently a bug where the VM looks for a user on the host machine that doesn't exist. Until we are able to fix it in the starter code, you can manually fix it [using this information from piazza](https://piazza.com/class/k7m53jbmw0n6qf?cid=22).
 1. Run `$ vagrant ssh` to log into the newly created box.
 
 You should see something like this:
