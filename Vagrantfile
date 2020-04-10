@@ -30,6 +30,11 @@ Vagrant.configure("2") do |config|
   
     # Customize the amount of memory on the VM:
     # vb.memory = "1024"
+
+    # The ubuntu base box/VirtualBox have a bug where they try to write the output from
+    # the serial port to a file which was hard-coded when the box was created.
+    # This sets the serial output a file in the current directory, which seems to fix things.
+    vb.customize [ "modifyvm", :id, "--uartmode1", "file", File.join(Dir.pwd, "console.log") ]
   end
   
   # View the documentation for the provider you are using for more
