@@ -15,8 +15,8 @@ def jellyfish(n, degree, num_hosts):
       Called "k" in jellyfish paper
 
     num_hosts: int
-      number of edges dedicated to hosts per switch. Called "r" in jellyfish paper
-      (k - r edges per switch go to other switches).
+      number of edges dedicated to hosts per switch. Called "k-r" in jellyfish paper
+      (r edges per switch go to other switches).
 
     Returns
     -------
