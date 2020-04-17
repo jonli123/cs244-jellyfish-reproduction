@@ -13,16 +13,26 @@ class TestJellyfishGenerator(unittest.TestCase):
         for n in range(12,20):
             for r in range(4):
                 G = jellyfish.graphs.jellyfish(n, degree=r+2, num_hosts=r)
+                
+                # It'll useful to be able to distinguish hosts and switches
+                # for the mininet section. You can add data to a node when creating it.
+                # e.g.
+                #  G = nx.Graph()
+                #  G.add_node(1, type='host')
+                # Check out the networkx documentation for more information.
                 hosts = [n for n,d in G.nodes.data() if d.get('type') == 'host']
+                
                 self.assertEqual(len(hosts), n*r)
 
     def test_correct_degree(self):
         for n in range(12,20):
             for r in range(4):
                 G = jellyfish.graphs.jellyfish(n, degree=r+2, num_hosts=r)
+                
+                # See above comment about adding data to nodes.
                 switches = [n for n,d in G.nodes.data() if d.get('type') == 'switch']
                 for s in switches:
-                    self.assertEqual(G.degree[s], r+2)
+                    self.assertIn(G.degree[s], [r+1, r+2])
                 
 if __name__ == '__main__':
     unittest.main()
