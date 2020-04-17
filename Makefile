@@ -13,7 +13,7 @@ figures/figure_1a.png:
 	jellyfish draw --graph='fat_tree' -k 4 figures/figure_1a.png
 
 figures/figure_1b.png:
-	jellyfish draw --graph='jellyfish' -n 16 -k 4 -r 2 figures/figure_1b.png
+	jellyfish draw --graph='jellyfish' -n 16 -k 4 -r 1 figures/figure_1b.png
 
 figures/figure_1c.png:
 	jellyfish figure_1c figures/figure_1c.png
