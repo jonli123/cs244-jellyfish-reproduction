@@ -11,6 +11,10 @@ In order to generate figures:
 ```
 sudo make figures
 ```
+If there is difficulty with pinging, it may be beneficial to run 
+```
+sudo mn -c
+```
 Figure generation has a cache: .npy files are saved and loaded in some functions. 
 These functions are: 
 ```
