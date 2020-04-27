@@ -25,8 +25,17 @@ def graph_to_topo(graph):
     -------
     mininet.Topo
     """
+    topo = Topo()
+    for (n, nodedata) in graph.nodes.items():
+        if nodedata.get('type') == 'host':
+            host = topo.addHost(str(n))
+        else:
+            switch = topo.addSwitch(str(n))
 
-    raise Exception("Not implemented")
+    for (source,dest) in graph.edges:
+        topo.addLink( str(source), str(dest), cls=TCLink, bw=10)
+
+    return topo
 
 def make_mininet(graph):
     """
@@ -45,7 +54,7 @@ def make_mininet(graph):
 
     # pox controller
     pox = RemoteController("c1", ip="127.0.0.1", port=6633)
-    
+
     return Mininet(topo=topo, controller=pox, autoSetMacs=True)
 
 def run(graph):
@@ -61,7 +70,7 @@ def run(graph):
 
     mininet.clean.cleanup()
     net = make_mininet(graph)
-    
+
     net.start()
     CLI(net)
     net.stop()
