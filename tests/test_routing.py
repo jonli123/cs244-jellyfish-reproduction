@@ -10,10 +10,9 @@ class TestRouting(unittest.TestCase):
         """
         Create a jellyfish network and check that all hosts can ping each other.
         """
-        #lg.setLogLevel('info')
+        lg.setLogLevel('info')
         # You can uncomment this to have mininet print out more debugging information
         jelly = jellyfish.graphs.jellyfish(16, 4, 1)
-        #jelly = jellyfish.graphs.jellyfish(16, 4, 1)
         mininet.clean.cleanup()
         net = jellyfish.mininet.make_mininet(jelly)
 

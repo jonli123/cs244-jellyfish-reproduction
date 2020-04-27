@@ -27,9 +27,6 @@ def figure_1c(filename):
         for m in large_jellyfish.nodes:
             if n != m:
                 length = length_dict[n][m]
-                if length == 12:
-                    print(n,m)
-                    print()
                 path_lengths['Jellyfish'][length+1] += 1
 
     length_dict = dict(nx.shortest_path_length(large_fattree))
@@ -191,58 +188,65 @@ def figure_9(filename):
     plt.savefig(filename)
 
 def figure_1c_mininet(filename):
-    # TODO: implement this
     lg.setLogLevel('info')
 
     if not os.path.isfile('jelly_bins.npy'):
-        jelly = jellyfish.graphs.jellyfish(8, 4, 2)
+        jelly = jellyfish.graphs.jellyfish(16, 4, 1)
         mininet.clean.cleanup()
         net = jellyfish.mininet.make_mininet(jelly)
-        time.sleep(4)
         net.start()
-        time.sleep(4)
         net.waitConnected()
         data = net.pingAllFull()
         net.stop()
-        arr_ping = []
+        jelly_ping = []
         for _,_,t in data:
             rtt = t[3]
-            print(rtt)
-            arr_ping.append(rtt)
-
-        jelly_plot = [0]*5
-        for p in arr_ping:
-            if p < 150:
-                jelly_plot[int(p/30)] += 1
-        jelly_plot = [x/sum(jelly_plot) for x in jelly_plot]
-        np.save('jelly_bins.npy', jelly_plot)
+            jelly_ping.append(rtt)
+        np.save('jelly_bins.npy', jelly_ping)
     else:
-        jelly_plot = np.load('jelly_bins.npy')
+        jelly_ping = np.load('jelly_bins.npy')
+    jelly_plot = [0]*5
+    for p in jelly_ping:
+        if p < 10:
+            jelly_plot[0] += 1
+        elif p < 20:
+            jelly_plot[1] += 1
+        elif p < 30:
+            jelly_plot[2] += 1
+        elif p < 40:
+            jelly_plot[3] += 1
+        else:
+            jelly_plot[4] += 1
+    jelly_plot = [x/sum(jelly_plot) for x in jelly_plot]
 
     if not os.path.isfile('fat_tree_bins.npy'):
-        fat_tree = jellyfish.graphs.fat_tree(6) #jellyfish.graphs.jellyfish(16, 4, 1)
+        fat_tree = jellyfish.graphs.fat_tree(6)
         mininet.clean.cleanup()
         net = jellyfish.mininet.make_mininet(fat_tree)
-        time.sleep(4)
         net.start()
-        time.sleep(4)
         net.waitConnected()
         data = net.pingAllFull()
         net.stop()
         arr_ping = []
         for _,_,t in data:
             rtt = t[3]
-            print(rtt)
             arr_ping.append(rtt)
-
-        bin_plot = [0]*5
-        for p in arr_ping:
-            if p < 150:
-                bin_plot[int(p/30)] += 1
-        bin_plot = [x/sum(bin_plot) for x in bin_plot]
-        np.save('fat_tree_bins.npy', bin_plot)
+        np.save('fat_tree_bins.npy', arr_ping)
     else:
-        bin_plot = np.load('fat_tree_bins.npy')
+        arr_ping = np.load('fat_tree_bins.npy')
+    bin_plot = [0]*5
+    for p in arr_ping:
+        if p < 10:
+            bin_plot[0] += 1
+        elif p < 20:
+            bin_plot[1] += 1
+        elif p < 30:
+            bin_plot[2] += 1
+        elif p < 40:
+            bin_plot[3] += 1
+        else:
+            bin_plot[4] += 1
+    bin_plot = [x/sum(bin_plot) for x in bin_plot]
 
 
     width = 0.35
@@ -258,33 +262,12 @@ def figure_1c_mininet(filename):
     plt.savefig(filename)
 
 
-# def table_1(filename):
-#     graph = jellyfish.graphs.fat_tree(2)
-#     mininet.clean.cleanup()
-#     net = jellyfish.mininet.make_mininet(graph)
-#     net.start()
-#     #dumpNodeConnections(net.hosts)
-#     net.waitConnected()
-#     results = {}
-#     port = 5000
-#     for host1 in net.hosts:
-#         host2 = host1
-#         while host2 == host1:
-#             host2 = random.choice(net.hosts)
-#         host2.cmd('iperf -s -p ' + str(port) + ' -1 &')
-#         result = host1.cmd('iperf -c ' + host2.IP() + ' -p ' + str(port))
-#         host_pair = (host1.name, host2.name)
-#         results[host_pair] = result
-#         port += 1
-#         print(result)
-#     net.stop()
-
 def table_1(filename):
     lg.setLogLevel('info')
     fat_results = {}
     jelly_results = {}
     if not os.path.isfile('fat_results.npy'):
-        jelly = jellyfish.graphs.fat_tree(10)
+        jelly = jellyfish.graphs.fat_tree(4)
         mininet.clean.cleanup()
         net = jellyfish.mininet.make_mininet(jelly)
         net.start()
@@ -305,8 +288,7 @@ def table_1(filename):
        fat_results = np.load('fat_results.npy',allow_pickle=True).item()
 
     if not os.path.isfile('jelly_results.npy'):
-        #lg.setLogLevel('info')
-        jelly = jellyfish.graphs.jellyfish(98, 14, 7)
+        jelly = jellyfish.graphs.jellyfish(16, 4, 1)
         mininet.clean.cleanup()
         net = jellyfish.mininet.make_mininet(jelly)
         net.start()

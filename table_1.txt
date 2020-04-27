@@ -1,0 +1,2 @@
+Congestion control	 Fat-Tree ECMP	 Jellyfish ECMP
+TCP 1 Flow	 63.873333333333335	79.66428571428571
